@@ -1,0 +1,46 @@
+<div ng-controller="homeController">
+  <header ng-include="'/pages/header.html'">
+     <!-- <%include ./partials/header %> -->
+  </header>
+
+  <div id="wrapper">
+   <div class="overlay"></div>
+  <!-- tabbable -->
+  <div id="page-content-wrapper">
+   <button type="button" class="hamburger is-closed  " data-toggle="offcanvas"> <span class="hamb-top"></span> <span class="hamb-middle"></span> <span class="hamb-bottom"></span> </button>
+   <div class="container">
+   <div class="row tabbable wrap" id="dashboards">
+      <ul class="nav nav-tabs tabSpaceCustom">
+
+        <li ng-repeat="dashboard in dashboards" ng-class="{active:isActiveTab(dashboard.tabId)}"
+                ng-click="onClickTab(dashboard)">
+          <a href="dashboard" data-toggle="tab">{{dashboard.tabTitle}}</a>
+        </li>
+      </ul>
+
+      <div class="tab-content" id="dashboardsContent" ng-repeat="dashboardItem in dashboardItems">
+        <div class="tab-pane" id={{dashboardItem.tabId}} ng-repeat="row in dashboardItem.rows" ng-class="{active:isActiveTab(dashboardItem.tabId)}"
+                ng-click="onClickTab(dashboardItem)">
+          <div ng-class="row" id={{row.rowId}}>
+            <div class = "col-lg-{{row.colWidth}}" >
+              <div class = "panel panel-primary">
+                <div class = "panel-heading" id = "header">
+
+                </div>
+              </div>  <!-- end of panel -->
+            </div> <!-- end of col -->
+          </div>  <!-- end of row -->
+        </div>  <!-- end of tab pane -->
+      </div>  <!-- end of tab content -->
+
+
+
+  </div>
+  </div>
+  </div>
+
+  <!-- <% include ../partials/menu %>
+  <% include ../partials/commentsDialog %> -->
+
+  </div>
+</div>
