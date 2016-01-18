@@ -1,7 +1,5 @@
 <div ng-controller="homeController">
-  <header ng-include="'/pages/header.html'">
-     <!-- <%include ./partials/header %> -->
-  </header>
+  <header ng-include="'/pages/header.html'"></header>
 
   <div id="wrapper">
    <div class="overlay"></div>
@@ -11,7 +9,6 @@
    <div class="container">
    <div class="row tabbable wrap" id="dashboards">
       <ul class="nav nav-tabs tabSpaceCustom">
-
         <li ng-repeat="dashboard in dashboards" ng-class="{active:isActiveTab(dashboard.tabId)}"
                 ng-click="onClickTab(dashboard)">
           <a href="dashboard" data-toggle="tab">{{dashboard.tabTitle}}</a>
@@ -29,7 +26,7 @@
                   {{title}}
                 </div> <!-- end of panel heading -->
                 <div id = barChart>
-                  
+
                 </div>
                 <hr class = hr-prop>
 
