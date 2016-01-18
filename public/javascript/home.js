@@ -28,7 +28,18 @@ angular.module('visualApp').controller('homeController', function($scope, $http,
     }
   });
 
-  $http.get('chartData/widgets').success(function(widget) {
-    $scope.widgetItems = widget;
+  $http.get('chartData/widgets').success(function(widgets) {
+    $scope.widgetItems = widgets;
+
+    $scope.widget = function(widgetId) {
+      widgets.forEach(function(w) {
+         if(w.widgetId === widgetId) {
+            $scope.title = w.title;
+            $scope.chartRenderer = w.chartRenderer;
+            $scope.url = w.url;
+            $scope.comments = w.comments;
+         }
+      })
+    }
   });
 });
