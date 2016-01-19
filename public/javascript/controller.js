@@ -4,6 +4,5 @@ visualApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
     when('/', {
       templateUrl: 'pages/home.html'
-      // controller: 'homeController'
     });
 }]);

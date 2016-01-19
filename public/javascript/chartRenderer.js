@@ -28,7 +28,6 @@ module.factory('ChartService', [function() {
   };
 
   function plotContinentChart (chartContainer, containerWidth, jsonDataUrl){
-console.log(chartContainer);
      width = containerWidth || width;
      width = containerWidth -margin.left - margin.right;
      var x = d3.scale.ordinal()
@@ -128,7 +127,6 @@ console.log(chartContainer);
   }
 
   function gdpStackedBarChart(chartContainer, containerWidth, jsonDataUrl) {
-console.log(chartContainer);
      width = containerWidth || width;
      width = containerWidth -margin.left - margin.right;
      var x = d3.scale.ordinal()
