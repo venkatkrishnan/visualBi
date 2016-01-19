@@ -38,6 +38,9 @@ angular.module('visualApp').controller('homeController', function($scope, $http,
             $scope.chartRenderer = w.chartRenderer;
             $scope.url = w.url;
             $scope.comments = w.comments;
+
+            // $scope.chartFunction = "chartLoader" + "." + $scope.chartRenderer + '("' + widgetContainer + '", 500, "' + $scope.url + '")';
+            // $scope.$execFunction = $scope.$eval($scope.chartFunction);
          }
       })
     }

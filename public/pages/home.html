@@ -16,10 +16,10 @@
       </ul>
 
       <div class="tab-content" id="dashboardsContent" ng-repeat="dashboardItem in dashboardItems">
-        <div class="tab-pane" id={{dashboardItem.tabId}} ng-repeat="row in dashboardItem.rows" ng-class="{active:isActiveTab(dashboardItem.tabId)}"
+        <div class="tab-pane" id={{dashboardItem.tabId}} ng-init="index = 1" ng-repeat="row in dashboardItem.rows" ng-class="{active:isActiveTab(dashboardItem.tabId)}"
                 ng-click="onClickTab(dashboardItem)">
           <div ng-class="row" id={{row.rowId}}>
-            <div class = "col-lg-{{row.colWidth}}" >
+            <div class = "col-lg-{{row.colWidth}}" id="{{dashboardItem.tabId + row.rowId}}col{{$index+1}}" >
               <div class = "panel panel-primary">
                 {{widget(row.widgetId)}}
                 <div class = "panel-heading" id = "header">
