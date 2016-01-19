@@ -1,4 +1,4 @@
-angular.module('visualApp').controller('homeController', function($scope, $http, $log) {
+angular.module('visualApp').controller('homeController', function($scope, $http, $log, ChartService) {
 
   $http.get('/tabs').success(function(data) {
     $scope.dashboards = data.dashboards;
@@ -31,7 +31,7 @@ angular.module('visualApp').controller('homeController', function($scope, $http,
   $http.get('chartData/widgets').success(function(widgets) {
     $scope.widgetItems = widgets;
 
-    $scope.widget = function(widgetId) {
+    $scope.widget = function(widgetId, widgetContainer) {
       widgets.forEach(function(w) {
          if(w.widgetId === widgetId) {
             $scope.title = w.title;
@@ -39,8 +39,8 @@ angular.module('visualApp').controller('homeController', function($scope, $http,
             $scope.url = w.url;
             $scope.comments = w.comments;
 
-            // $scope.chartFunction = "chartLoader" + "." + $scope.chartRenderer + '("' + widgetContainer + '", 500, "' + $scope.url + '")';
-            // $scope.$execFunction = $scope.$eval($scope.chartFunction);
+            ChartService[$scope.chartRenderer]("#" + widgetContainer, 500, $scope.url);
+
          }
       })
     }

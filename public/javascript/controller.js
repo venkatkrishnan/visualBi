@@ -1,4 +1,4 @@
-var visualApp = angular.module('visualApp', ['ngRoute', 'ui.bootstrap']);
+var visualApp = angular.module('visualApp', ['ngRoute', 'ui.bootstrap', 'MyApp']);
 
 visualApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
