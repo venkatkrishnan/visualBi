@@ -1,4 +1,4 @@
-angular.module('visualApp').controller('homeController', function($scope, $http, $log, ChartService) {
+angular.module('visualApp').controller('homeController', function($scope, $http, $log) {
 
-  
+
 });

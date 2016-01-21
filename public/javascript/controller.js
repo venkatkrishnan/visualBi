@@ -1,4 +1,4 @@
-var visualApp = angular.module('visualApp', ['ngRoute', 'ui.bootstrap', 'MyApp']);
+var visualApp = angular.module('visualApp', ['ngRoute', 'ui.bootstrap']);
 
 visualApp.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
@@ -30,47 +30,51 @@ visualApp.directive("tabsData", function($rootScope, $http) {
   };
 });
 
-visualApp.directive("dashboardData", function($rootScope, $http, $log, ChartService) {
+visualApp.directive("dashboardData", function($rootScope, $http, $log) {
   return {
     restrict : 'E',
     templateUrl : 'pages/dashboard.html',
-    controller: function() {
+    link: function($scope, $element, $attr) {
 
       $http.get('/dashboards').success(function(json) {
-        $rootScope.dashboardItems = json;
-        $rootScope.currentTab = json[0].tabId;
+        $scope.dashboardItems = json;
+        $scope.currentTab = json[0].tabId;
 
-        $rootScope.onClickTab = function (tab) {
-            $rootScope.currentTab = tab.tabId;
+        $scope.onClickTab = function (tab) {
+            $scope.currentTab = tab.tabId;
         }
 
-        $rootScope.isActiveTab = function(tabId) {
-            return tabId == $rootScope.currentTab;
+        $scope.isActiveTab = function(tabId) {
+            return tabId == $scope.currentTab;
         }
       });
 
       $http.get('chartData/widgets').success(function(widgets) {
-        $rootScope.widgetItems = widgets;
+        $scope.widgetItems = widgets;
 
-        $rootScope.widget = function(widgetId, widgetContainer) {
+        $scope.widget = function(widgetId, widgetContainer) {
+
           widgets.forEach(function(w) {
              if(w.widgetId === widgetId) {
-                $rootScope.title = w.title;
-                $rootScope.chartRenderer = w.chartRenderer;
-                $rootScope.url = w.url;
-                $rootScope.comments = w.comments;
+                $scope.title = w.title;
+                $scope.chartRenderer = w.chartRenderer;
+                $scope.url = w.url;
+                $scope.comments = w.comments;
 
-                var containerWidth = $("dashboardData").clientWidth;
-                $log.log(containerWidth);
-                // var widgetWidth = $("#"+widgetContainer).width();
+                var containerWidth = $(".container").clientWidth;
+                var widgetWidth = $("#"+widgetContainer).width();
+
+                if(widgetWidth > 100) {
+                  var width = $("#"+widgetContainer).width();
+                  var parentWidth = $("#" + widgetContainer).offsetParent().width();
+                  widgetWidth = (width * 100)/parentWidth;
+                }
+                var chartWidth = (containerWidth * widgetWidth)/100;
+
+                // var el = angular.element(document.querySelector('#' + widgetContainer + ' #barChart'));
+                // el.empty();
                 //
-                // if(widgetWidth > 100) {
-                //   var width = $("#"+widgetContainer).width();
-                //   var parentWidth = $("#" + widgetContainer).offsetParent().width();
-                //   widgetWidth = (width * 100)/parentWidth;
-                // }
-                // var chartWidth = (containerWidth * widgetWidth)/100;
-                // ChartService[$rootScope.chartRenderer]("#" + widgetContainer, chartWidth, $rootScope.url);
+                // ChartService[$scope.chartRenderer]("#" + widgetContainer, 500, $scope.url);
              }
           })
         }
@@ -78,3 +82,34 @@ visualApp.directive("dashboardData", function($rootScope, $http, $log, ChartServ
     }
   };
 });
+
+visualApp.directive("barChart", ['$log', 'plotContinentChart', 'gdpPerCapitaBarChart', 'gdpStackedBarChart', 'plotNorthEast', function($log,
+                                                                    plotContinentChart, gdpPerCapitaBarChart, gdpStackedBarChart, plotNorthEast) {
+  return {
+    restrict : 'E',
+    templateUrl : 'pages/barchart.html',
+    replace: true,
+    scope: {
+      parameters : "@",
+      chartRenderer : "@"
+    },
+    link: function(scope, elements, attrs) {
+      if(parseInt(elements[0].clientWidth) === 0) {
+        var myWatcher = scope.$watch(function() {
+  	      return elements[0].clientWidth;
+        }, function(value){
+
+	        if(value >0) {
+
+            var chartMethod = scope.chartRenderer + ".render" + '(elements[0]' + ', ' + value + ', "' + scope.parameters + '")';
+            $log.log(chartMethod);
+
+            eval(chartMethod).then(function(data) {
+              myWatcher();
+            });
+          }
+        });
+      }
+    }
+  }
+}]);
