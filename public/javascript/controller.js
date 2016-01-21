@@ -7,6 +7,13 @@ visualApp.config(['$routeProvider', function($routeProvider) {
     });
 }]);
 
+visualApp.directive("headData", function() {
+  return {
+    restrict : 'E',
+    templateUrl : 'pages/head.html'
+  }
+});
+
 visualApp.directive("tabsData", function($rootScope, $http) {
   return {
     restrict : 'E',
@@ -52,7 +59,7 @@ visualApp.directive("dashboardData", function($rootScope, $http, $log) {
       $http.get('chartData/widgets').success(function(widgets) {
         $scope.widgetItems = widgets;
 
-        $scope.widget = function(widgetId, widgetContainer) {
+        $scope.widget = function(widgetId) {
 
           widgets.forEach(function(w) {
              if(w.widgetId === widgetId) {
@@ -60,21 +67,6 @@ visualApp.directive("dashboardData", function($rootScope, $http, $log) {
                 $scope.chartRenderer = w.chartRenderer;
                 $scope.url = w.url;
                 $scope.comments = w.comments;
-
-                var containerWidth = $(".container").clientWidth;
-                var widgetWidth = $("#"+widgetContainer).width();
-
-                if(widgetWidth > 100) {
-                  var width = $("#"+widgetContainer).width();
-                  var parentWidth = $("#" + widgetContainer).offsetParent().width();
-                  widgetWidth = (width * 100)/parentWidth;
-                }
-                var chartWidth = (containerWidth * widgetWidth)/100;
-
-                // var el = angular.element(document.querySelector('#' + widgetContainer + ' #barChart'));
-                // el.empty();
-                //
-                // ChartService[$scope.chartRenderer]("#" + widgetContainer, 500, $scope.url);
              }
           })
         }

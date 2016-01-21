@@ -1,23 +1,17 @@
-<div ng-controller="homeController">
+<div>
   <header ng-include="'/pages/header.html'"></header>
 
   <div id="wrapper">
-   <div class="overlay"></div>
-  <!-- tabbable -->
-  <div id="page-content-wrapper">
-   <button type="button" class="hamburger is-closed  " data-toggle="offcanvas"> <span class="hamb-top"></span> <span class="hamb-middle"></span> <span class="hamb-bottom"></span> </button>
-   <div class="container">
-   <div class="row tabbable wrap" id="dashboards">
-    <tabs-data></tabs-data>
+    <div class="overlay"></div>
 
-    <dashboard-data></dashboard-data>
-
-  </div>
-  </div>
-  </div>
-
-  <!-- <% include ../partials/menu %>
-  <% include ../partials/commentsDialog %> -->
-
+    <div id="page-content-wrapper">
+      <button type="button" class="hamburger is-closed  " data-toggle="offcanvas"> <span class="hamb-top"></span> <span class="hamb-middle"></span> <span class="hamb-bottom"></span> </button>
+      <div class="container">
+        <div class="row tabbable wrap" id="dashboards">
+          <tabs-data></tabs-data>
+          <dashboard-data></dashboard-data>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

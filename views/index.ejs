@@ -1,30 +1,22 @@
 <!DOCTYPE html>
 <html ng-app="visualApp">
-   <head ng-include="'/pages/head.html'"></head>
+   <head-data></head-data>
    <body>
       <div class="container" ng-view>
 
       </div>
-      <script src="/javascript/jquery.min.js" charset="utf-8"></script>
+
+      <!-- Script files -->
+
+      <script src="/javascript/lib/jquery.min.js" charset="utf-8"></script>
       <script src="/bootstrap/js/bootstrap.js" charset="utf-8"></script>
-
-
-
-      <!--Script files goes here-->
       <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
-      <!-- <script src="/javascript/chartLoader.js"></script> -->
-      <!-- <script src="/javascript/widgetHandler.js" charset="utf-8"></script> -->
-      <script src="/javascript/timeLine.js" charset="utf-8"></script>
-      <!-- <script src="/javascript/script.js" charset="utf-8"></script> -->
-      <script src="/javascript/autogrow-textarea.js" charset="utf-8"></script>
-      <script src="/javascript/menu.js" charset="utf-8"></script>
-
-      <script src="/javascript/angular.min.js" charset="utf-8"></script>
-      <script src="/javascript/angular-bootstrap.min.js" charset="utf-8"></script>
+      <script src="/javascript/lib/timeLine.js" charset="utf-8"></script>
+      <script src="/javascript/lib/autogrow-textarea.js" charset="utf-8"></script>
+      <script src="/javascript/lib/angular.min.js" charset="utf-8"></script>
+      <script src="/javascript/lib/angular-bootstrap.min.js" charset="utf-8"></script>
       <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.1/angular-route.min.js"></script>
       <script type="text/javascript" src="/javascript/controller.js"></script>
-      <script type="text/javascript" src="/javascript/home.js"></script>
-      <!-- <script type="text/javascript" src="/javascript/chartRenderer.js"></script> -->
       <script src="/javascript/renderer/plotContinentChart.js"></script>
       <script src="/javascript/renderer/gdpPerCapitaBarChart.js"></script>
       <script src="/javascript/renderer/gdpStackedBarChart.js"></script>

@@ -4,11 +4,11 @@
     <div ng-class="row" id={{row.rowId}}>
       <div class = "col-lg-{{row.colWidth}}" id="{{dashboardItem.tabId + row.rowId}}col{{$index+1}}" >
         <div class = "panel panel-primary">
-          {{widget(row.widgetId, dashboardItem.tabId + row.rowId+"col"+($index+1))}}
+          {{widget(row.widgetId)}}
           <div class = "panel-heading" id = "header">
             {{title}}
           </div> <!-- end of panel heading -->
-          
+
           <bar-chart parameters = "{{ url }}" chart-renderer = "{{ chartRenderer }}"></bar-chart>
 
           <hr class = hr-prop>
