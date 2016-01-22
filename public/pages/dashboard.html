@@ -1,8 +1,6 @@
-<div class="tab-content" id="dashboardsContent" ng-repeat="dashboardItem in dashboardItems">
-  <div class="tab-pane" id={{dashboardItem.tabId}} ng-init="index = 1"
-  ng-repeat="row in dashboardItem.rows" ng-class="{active:isActiveTab(dashboardItem.tabId)}"
-          >
-    <div ng-class="row" id={{row.rowId}}>
+<div class="tab-content" id="dashboardsContent">
+  <div class="tab-pane" id={{dashboardItem.tabId}} ng-repeat="dashboardItem in dashboardItems" ng-class="{active:isActiveTab(dashboardItem.tabId)}">
+    <div ng-class="row" id={{row.rowId}} ng-repeat="row in dashboardItem.rows">
       <div class = "col-lg-{{row.colWidth}}" id="{{dashboardItem.tabId + row.rowId}}col{{$index+1}}" >
         <div class = "panel panel-primary">
           {{widget(row.widgetId)}}

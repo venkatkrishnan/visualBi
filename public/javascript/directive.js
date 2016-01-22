@@ -75,25 +75,25 @@ visualApp.directive("headData", function() {
     },
     link: function(scope, elements, attrs) {
 
-      if(parseInt(elements[0].clientWidth) === 0) {
-        var myWatcher = scope.$watch(function() {
-  	      return elements[0].clientWidth;
-        }, function(value){
-	        if(value > 0) {
-            var chartMethod = scope.chartRenderer + ".render" + '(elements[0]' +
-                                ', ' + value + ', "' + scope.parameters + '")';
+      // if(parseInt(elements[0].clientWidth) === 0) {
+      //   var myWatcher = scope.$watch(function() {
+  	  //     return elements[0].clientWidth;
+      //   }, function(value){
+	    //     if(value > 0) {
+      //       var chartMethod = scope.chartRenderer + ".render" + '(elements[0]' +
+      //                           ', ' + value + ', "' + scope.parameters + '")';
+      //
+      //       eval(chartMethod).then(function(data) {
+      //         myWatcher();
+      //       });
+      //     }
+      //   });
+      // } else {
 
-            eval(chartMethod).then(function(data) {
-              myWatcher();
-            });
-          }
-        });
-      } else {
-        var chartMethod = scope.chartRenderer + ".render" + '(elements[0]' +
-                            ', ' + elements[0].clientWidth + ', "' + scope.parameters + '")';
-
-        eval(chartMethod);
-      }
+      var chartMethod = scope.chartRenderer + ".render" + '(elements[0]' +
+                        ', ' + elements[0].clientWidth + ', "' + scope.parameters + '")';
+      eval(chartMethod);
+      // }
     }
   }
 }]);

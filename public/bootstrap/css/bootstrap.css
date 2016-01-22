@@ -4156,13 +4156,10 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
 }
 .tab-content > .tab-pane {
-  display: block;
-  height: 0;
-  overflow-y: hidden;
+  display: none;
 }
 .tab-content > .active {
   display: block;
-  height: auto;
 }
 .nav-tabs .dropdown-menu {
   margin-top: -1px;
