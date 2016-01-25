@@ -31,26 +31,26 @@ visualApp.directive("headData", function() {
     restrict : 'E',
     templateUrl : 'pages/dashboard.html',
     scope: {},
-    link: function($scope, $element, $attr,scope) {
+    link: function(scope,$element, $attr) {
       $log.log("Calling link inside the dashboardData");
       var dashboardPromise = new Promise(function(resolve,reject) {
         $http.get('/dashboards').success(function(json) {
-        $scope.dashboardItems = json;
-        $scope.currentTab = json[0].tabId;
+        scope.dashboardItems = json;
+        scope.currentTab = json[0].tabId;
 
-        $scope.onClickTab = function (tab) {
-            $scope.currentTab = tab.tabId;
+        scope.onClickTab = function (tab) {
+            scope.currentTab = tab.tabId;
         }
 
-        $scope.isActiveTab = function(tabId) {
-            return tabId == $scope.currentTab;
+        scope.isActiveTab = function(tabId) {
+            return tabId == scope.currentTab;
         }
         resolve("success");
       });
     });
     var widgetPromise = new Promise(function(resolve,reject) {
         $http.get('chartData/widgets').success(function(widgets) {
-        $scope.widgetItems = widgets;
+        scope.widgetItems = widgets;
 
         // scope.widget = function(widgetId) {
         //   widgets.forEach(function(w) {
@@ -67,9 +67,9 @@ visualApp.directive("headData", function() {
     });
 
     Promise.all([dashboardPromise,widgetPromise]).then(function() {
-      $scope.dashboardItems.map(function(dashboardItem) {
+      scope.dashboardItems.map(function(dashboardItem) {
         dashboardItem.rows.forEach(function(row) {
-          $scope.widgetItems.forEach(function(widgetItem) {
+          scope.widgetItems.forEach(function(widgetItem) {
             if(row.widgetId == widgetItem.widgetId) {
               row.title = widgetItem.title;
               row.chartRenderer = widgetItem.chartRenderer;
